@@ -33,8 +33,8 @@ export function Countdown() {
               {units.map(([label, v]) => (
                 <div key={label} className="panel relative overflow-hidden py-5 sm:py-8 md:py-12">
                   <div className="scanlines pointer-events-none absolute inset-0 opacity-40" />
-                  <span className="relative block font-display text-4xl tabular-nums text-bone text-glow sm:text-6xl md:text-8xl">
-                    {c.ready ? pad(v) : "--"}
+                  <span suppressHydrationWarning className="relative block font-display text-4xl tabular-nums text-bone text-glow sm:text-6xl md:text-8xl">
+                    {pad(v)}
                   </span>
                   <span className="relative mt-2 block text-[0.6rem] font-semibold tracking-[0.3em] text-spirit sm:text-xs">{label}</span>
                 </div>
@@ -232,7 +232,7 @@ export function Signup() {
           </h2>
           <p className="mt-3 font-display text-xl text-spirit text-glow md:text-3xl">BE FIRST THROUGH THE GATE.</p>
           <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
-            Sign up for the Mononoke Inu launch list for game updates, early access announcements, and surprise rewards. Join the launch list for surprise drops and special community rewards.
+            Join the pack for launch updates, early access announcements, and surprise community rewards.
           </p>
         </Reveal>
         <Reveal delay={150}>

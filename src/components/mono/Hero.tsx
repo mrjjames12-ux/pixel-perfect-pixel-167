@@ -16,7 +16,7 @@ function MiniCountdown() {
     <div className="flex items-center gap-2 font-display tabular-nums" aria-label="Time until Spirit Run launch">
       {units.map(([v, l], i) => (
         <div key={l} className="flex items-baseline gap-0.5">
-          <span className="text-2xl text-bone md:text-3xl">{c.ready ? pad(v) : "--"}</span>
+          <span suppressHydrationWarning className="text-xl text-bone md:text-2xl">{pad(v)}</span>
           <span className="font-body text-xs text-spirit">{l}</span>
           {i < 3 && <span className="ml-1 text-muted-foreground">:</span>}
         </div>

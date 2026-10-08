@@ -5,17 +5,16 @@ import { GAME_URL, LAUNCH_DATE } from "@/config/site";
 const LAUNCH_MS = new Date(LAUNCH_DATE).getTime();
 
 export function useCountdown() {
-  const [now, setNow] = useState<number | null>(null);
+  const [now, setNow] = useState<number>(() => Date.now());
   useEffect(() => {
     setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
-  const diff = now === null ? null : Math.max(0, LAUNCH_MS - now);
+  const diff = Math.max(0, LAUNCH_MS - now);
   const live = diff === 0;
-  const s = diff === null ? 0 : Math.floor(diff / 1000);
+  const s = Math.floor(diff / 1000);
   return {
-    ready: now !== null,
     live,
     days: Math.floor(s / 86400),
     hours: Math.floor((s % 86400) / 3600),
@@ -24,8 +23,9 @@ export function useCountdown() {
   };
 }
 
-export function PlayButton({ className = "", label = "PLAY SPIRIT RUN" }: { className?: string; label?: string }) {
+export function PlayButton({ className = "", label }: { className?: string; label?: string }) {
   const { live } = useCountdown();
+  label = label ?? (live ? "PLAY SPIRIT RUN NOW" : "PLAY SPIRIT RUN");
   const external = GAME_URL.startsWith("http");
   return (
     <a
