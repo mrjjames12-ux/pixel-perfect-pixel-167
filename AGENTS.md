@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Launch date, game URL, X link and token links live in `src/config/site.ts`; edit there only so every button/countdown stays in sync.
+- Launch-list emails are insert-only for visitors (no read policy) so submitted emails are never exposed publicly.
