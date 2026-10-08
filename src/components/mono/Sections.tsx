@@ -163,7 +163,7 @@ export function Lore() {
 /* ---------------- $MONO ---------------- */
 export function Token() {
   return (
-    <section id="mono" className="relative py-24 md:py-32">
+    <section id="mono" className="relative py-20 md:py-24">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <Reveal><SectionHeading eyebrow="$MONO" jp="通貨" title={<>THE PACK HAS<br />A CURRENCY.</>} /></Reveal>
         <Reveal delay={150}>
@@ -171,7 +171,7 @@ export function Token() {
             <img src={logo} alt="$MONO" loading="lazy" width={200} height={200} className="mx-auto h-32 w-32 rounded-full glow md:h-44 md:w-44" />
             <div>
               <div className="flex flex-wrap items-baseline gap-4">
-                <span className="font-display text-6xl text-spirit text-glow md:text-8xl">$MONO</span>
+                <span className="font-display text-5xl text-spirit md:text-6xl">$MONO</span>
                 <span className="border border-accent/60 px-3 py-1 text-xs font-semibold tracking-[0.3em] text-accent">SOLANA</span>
               </div>
               <div className="mt-6 border border-border bg-ink/60 p-4">
