@@ -64,7 +64,7 @@ export function Hero() {
           <span className="h-2 w-2 animate-pulse rounded-full bg-spirit" />
           <span className="text-[0.65rem] font-semibold tracking-[0.3em] text-spirit">COMING SOON</span>
         </div>
-        <h1 className="mt-5 font-display text-[3.4rem] leading-[0.85] tracking-tight text-bone sm:text-7xl md:text-8xl lg:text-[9rem]">
+        <h1 className="mt-5 font-display text-[2.75rem] leading-[0.85] tracking-tight text-bone sm:text-7xl md:text-8xl lg:text-[9rem]">
           MONONOKE
           <br />
           <span className="text-spirit text-glow">INU</span>
