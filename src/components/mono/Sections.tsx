@@ -78,25 +78,34 @@ export function Game() {
         </Reveal>
 
         <Reveal delay={150}>
-          <div className="panel relative aspect-[4/5] overflow-hidden border-spirit/30 glow-soft sm:aspect-[4/3]">
-            <img src={hero} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full object-cover opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-transparent to-ink" />
+          <div className="panel relative aspect-[4/5] overflow-hidden border-2 border-spirit/40 glow sm:aspect-[4/3]">
+            <img src={hero} alt="" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-full w-full scale-110 object-cover opacity-45" />
+            <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-transparent to-ink" />
+            <div className="fog-layer opacity-80" />
+            <Particles count={10} />
             <div className="scanlines absolute inset-0 opacity-50" />
-            <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4 font-display text-xs md:text-sm">
-              <span className="text-spirit">SCORE 004210</span>
-              <span className="text-gold">x2</span>
-              <span className="text-bone">HI 018880</span>
+            {/* HUD top */}
+            <div className="absolute inset-x-0 top-0 grid grid-cols-3 gap-2 p-3 font-display text-[0.6rem] md:p-5 md:text-xs">
+              <div><p className="text-muted-foreground">SCORE</p><p className="text-base text-spirit text-glow md:text-xl">004210</p></div>
+              <div className="text-center"><p className="text-muted-foreground">MULTIPLIER</p><p className="text-base text-gold md:text-xl">x2</p></div>
+              <div className="text-right"><p className="text-muted-foreground">HIGH SCORE</p><p className="text-base text-bone md:text-xl">018880</p></div>
             </div>
-            <div className="absolute left-[12%] bottom-[22%] bob">
+            <div className="absolute left-3 top-16 flex flex-col gap-1.5 font-display text-[0.6rem] md:left-5 md:top-24 md:text-xs">
+              <span className="flex items-center gap-1.5 border border-spirit/30 bg-ink/70 px-2 py-1"><Coins className="h-3.5 w-3.5 text-spirit" /> $MONO ×042</span>
+              <span className="flex items-center gap-1.5 border border-spirit/30 bg-ink/70 px-2 py-1"><Flame className="h-3.5 w-3.5 text-spirit" /> SPIRIT FLAME ×07</span>
+            </div>
+            <div className="absolute left-[10%] bottom-[22%] bob">
               <img src={logo} alt="Mononoke runner" loading="lazy" width={120} height={120} className="h-20 w-20 rounded-full glow md:h-28 md:w-28" />
             </div>
-            <Coins className="absolute left-[45%] bottom-[40%] h-8 w-8 text-spirit bob" style={{ animationDelay: "-1s" }} />
-            <Flame className="absolute left-[60%] bottom-[52%] h-9 w-9 text-spirit flicker" />
-            <Sparkles className="absolute left-[72%] bottom-[34%] h-8 w-8 text-gold bob" style={{ animationDelay: "-2s" }} />
-            <Skull className="absolute right-[8%] bottom-[22%] h-12 w-12 text-oni" />
+            <Coins className="absolute left-[42%] bottom-[38%] h-8 w-8 text-spirit bob" style={{ animationDelay: "-1s" }} />
+            <Coins className="absolute left-[52%] bottom-[44%] h-7 w-7 text-spirit bob" style={{ animationDelay: "-1.6s" }} />
+            <Flame className="absolute left-[62%] bottom-[54%] h-9 w-9 text-spirit flicker" />
+            <Sparkles className="absolute left-[74%] bottom-[34%] h-8 w-8 text-gold bob" style={{ animationDelay: "-2s" }} />
+            <Skull className="absolute right-[6%] bottom-[22%] h-12 w-12 text-oni drop-shadow-[0_0_14px_var(--oni)]" />
             <div className="run-ground absolute inset-x-0 bottom-[18%] h-[3px]" />
-            <div className="absolute inset-x-0 bottom-0 p-4 text-center">
-              <span className="text-[0.65rem] font-semibold tracking-[0.4em] text-spirit flicker">PRESS START</span>
+            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between p-3 md:p-4">
+              <span className="text-[0.55rem] font-semibold tracking-[0.3em] text-muted-foreground">CONCEPT PREVIEW · NOT LIVE</span>
+              <span className="text-[0.6rem] font-semibold tracking-[0.4em] text-spirit flicker">PRESS START</span>
             </div>
           </div>
         </Reveal>
