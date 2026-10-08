@@ -23,9 +23,9 @@ function Index() {
     <main className="bg-background">
       <Nav />
       <Hero />
+      <Game />
       <Countdown />
       <Signup />
-      <Game />
       <Lore />
       <Token />
       <Community />
