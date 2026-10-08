@@ -75,7 +75,7 @@ export function Hero() {
       </span>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-10 pt-28 md:px-12 md:pb-16">
-        <h1 className="font-display text-[3.1rem] leading-[0.82] tracking-tight text-bone drop-shadow-[0_6px_30px_var(--ink)] sm:text-8xl md:text-[9rem] lg:text-[11rem]">
+        <h1 className="font-display text-[3.1rem] leading-[0.82] tracking-tight text-bone drop-shadow-[0_6px_30px_var(--ink)] sm:text-8xl md:text-[8rem] lg:text-[9.5rem]">
           MONONOKE <span className="text-spirit text-glow">INU</span>
         </h1>
         <p className="mt-3 font-display text-[1.6rem] leading-none tracking-wide md:mt-4 md:text-5xl">
