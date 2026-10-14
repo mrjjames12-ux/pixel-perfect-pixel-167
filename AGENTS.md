@@ -11,3 +11,4 @@
 
 - Launch date, game URL, X link and token links live in `src/config/site.ts`; edit there only so every button/countdown stays in sync.
 - Launch-list emails are insert-only for visitors (no read policy) so submitted emails are never exposed publicly.
+- Immersive scenes share WorldScene for scroll and pointer camera movement; disable camera motion when reduced motion is requested to keep exploration accessible.
