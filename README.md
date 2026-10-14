@@ -1,26 +1,55 @@
-# Pixel Perfect Preview
+name: Deploy MONONOKE
 
-Implement exactly the screenshot and nothing else
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
 
-This project was built with [Lovable](https://lovable.dev).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-**Live app**: https://pixel-perfect-pixel-167.lovable.app
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
-## Build with Lovable
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f9614526-1527-4e14-ad8d-40d8ceb9b2fd).
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
-## Development
+      - name: Install dependencies
+        run: npm install
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+      - name: Build website
+        run: npm run build
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
