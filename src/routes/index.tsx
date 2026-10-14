@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/mono/Nav";
 import { Hero } from "@/components/mono/Hero";
-import { Community, Countdown, Faq, Footer, Game, HowToPlay, Lore, Roadmap, Signup, Token } from "@/components/mono/Sections";
+import { Community, Faq, Footer, Roadmap, Signup, Token } from "@/components/mono/Sections";
+import { ForestJourney } from "@/components/mono/World";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Mononoke Inu — $MONO | Spirit Run" },
-      { name: "description", content: "The spirit awakens. Spirit Run is a supernatural arcade game from Mononoke Inu ($MONO) on Solana. Join the pack." },
+      { name: "description", content: "Enter the living forest of Mononoke Inu. Discover wandering spirits, follow the light, and begin your Spirit Run journey." },
       { property: "og:title", content: "Mononoke Inu — The Spirit Awakens" },
-      { property: "og:description", content: "Spirit Run: a supernatural arcade world built around the legendary Mononoke spirit. $MONO on Solana." },
+      { property: "og:description", content: "A world between worlds. Explore the living forest, meet its spirits, and find your pack in Mononoke Inu." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@mononokerun" },
@@ -20,17 +21,14 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="bg-background">
+    <main className="world-experience bg-background">
       <Nav />
       <Hero />
-      <Game />
-      <Countdown />
+      <ForestJourney />
       <Signup />
-      <Lore />
       <Token />
       <Community />
       <Roadmap />
-      <HowToPlay />
       <Faq />
       <Footer />
     </main>

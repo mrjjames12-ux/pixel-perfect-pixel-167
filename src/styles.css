@@ -37,10 +37,15 @@
   --color-gold: var(--gold);
   --color-ink: var(--ink);
   --color-bone: var(--bone);
+  --color-moonlight: var(--moonlight);
 }
 
 :root {
   --radius: 0.25rem;
+  --moonlight: oklch(0.83 0.09 190);
+  --world-shade: linear-gradient(90deg, color-mix(in oklab, var(--ink) 82%, transparent), color-mix(in oklab, var(--ink) 15%, transparent) 65%);
+  --world-edges: linear-gradient(180deg, var(--ink), transparent 18%, transparent 72%, var(--ink));
+  --world-mist: linear-gradient(180deg, transparent, color-mix(in oklab, var(--moonlight) 9%, transparent), transparent);
   --ink: oklch(0.11 0.005 150);
   --background: oklch(0.13 0.006 150);
   --foreground: oklch(0.95 0.01 110);
@@ -216,4 +221,121 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* A continuous, layered world rather than a collection of panels. */
+.world-experience { letter-spacing: 0; }
+.world-experience h1, .world-experience h2, .world-experience h3 { letter-spacing: 0; }
+.world-scene { position: relative; isolation: isolate; overflow: hidden; min-height: 900px; min-height: 105svh; background: var(--ink); scroll-margin-top: 60px; }
+.world-camera { position: absolute; inset: -6%; z-index: -3; transform: translate3d(var(--look-x, 0px), calc(var(--camera-y, 0px) + var(--look-y, 0px)), 0) scale(var(--camera-scale, 1.09)); transition: transform 1.2s cubic-bezier(.2,.7,.2,1); will-change: transform; }
+.world-camera img { width: 100%; height: 100%; object-fit: cover; }
+.world-shade { position: absolute; inset: 0; z-index: -2; background: var(--world-shade); }
+.world-scene::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--world-edges); }
+.world-mist { position: absolute; inset: 35% -20% -20%; pointer-events: none; background: var(--world-mist); animation: world-drift 24s ease-in-out infinite alternate; }
+.world-chapter { position: absolute; inset: 95px 6% auto; display: flex; align-items: center; justify-content: space-between; font-size: 10px; color: var(--moonlight); }
+.world-chapter .font-jp { font-size: 24px; }
+.world-story { position: relative; z-index: 2; max-width: 660px; width: 52%; margin-left: 8%; padding-top: 230px; padding-bottom: 170px; }
+.world-title { margin-top: 22px; font-family: var(--font-jp); font-size: 68px; font-weight: 500; line-height: 1.15; text-wrap: balance; text-shadow: 0 3px 25px var(--ink); }
+.world-copy { margin-top: 28px; font-size: 17px; line-height: 1.9; color: var(--bone); text-shadow: 0 2px 16px var(--ink); }
+.world-next, .world-bottom-link { color: var(--moonlight); padding: 0; gap: 18px; font-size: 12px; }
+.world-bottom-link { position: absolute; bottom: 65px; left: 8%; z-index: 3; }
+.world-floor-label { position: absolute; bottom: 70px; right: 8%; left: 8%; font-size: 10px; color: var(--moonlight); display: flex; justify-content: space-between; }
+.world-floor-label span { color: var(--muted-foreground); }
+.spirit-whisper { min-height: 24px; margin: 38px 0 20px; font-family: var(--font-jp); font-style: italic; font-size: 15px; color: var(--muted-foreground); transition: color .6s; }
+.spirit-whisper.is-awake { color: var(--moonlight); }
+.spirit-creature { position: absolute; z-index: 3; right: 9%; bottom: 14%; width: 320px; height: 320px; padding: 0; border: 0; background: transparent; border-radius: 0; animation: spirit-hover 7s ease-in-out infinite; transition: filter 1s; }
+.spirit-creature:hover, .spirit-creature.is-awake { background: transparent; filter: drop-shadow(0 0 22px var(--moonlight)); }
+.spirit-creature img { width: 100%; height: 100%; object-fit: contain; }
+.distant-spirit { position: absolute; right: 32%; top: 36%; width: 75px; height: 75px; opacity: .65; animation: spirit-hover 9s ease-in-out infinite reverse; }
+.world-run .world-camera img { object-position: 65% 50%; }
+.world-run .world-camera { transform: translate3d(var(--look-x, 0px), var(--camera-y, 0px),0) scale(1.35); }
+.world-run .world-story { padding-top: 180px; }
+.encounter-selector { display: flex; gap: 18px; margin-top: 30px; scroll-margin-top: 110px; }
+.encounter-symbol { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border); background: color-mix(in oklab, var(--ink) 55%, transparent); }
+.encounter-symbol svg { width: 23px; height: 23px; }
+.encounter-symbol.is-selected { border-color: currentColor; background: color-mix(in oklab, var(--moonlight) 12%, var(--ink)); }
+.encounter-symbol:hover { background: var(--secondary); }
+.encounter-story { min-height: 135px; max-width: 430px; margin-top: 27px; animation: story-appear .5s ease both; }
+.floating-flame, .floating-charm { position: absolute; pointer-events: none; color: var(--moonlight); filter: drop-shadow(0 0 15px var(--moonlight)); animation: spirit-hover 6s ease-in-out infinite; }
+.floating-flame svg { width: 100%; height: 100%; fill: color-mix(in oklab, var(--moonlight) 30%, transparent); stroke-width: 1; }
+.flame-one { width: 70px; height: 90px; right: 16%; top: 36%; }
+.flame-two { width: 30px; height: 45px; right: 31%; top: 54%; animation-delay: -3s; }
+.floating-charm { right: 22%; top: 67%; color: var(--gold); filter: drop-shadow(0 0 20px var(--gold)); animation-delay: -2s; }
+.floating-charm svg { width: 45px; height: 45px; }
+.world-gate { min-height: 1100px; }
+.world-gate .world-shade { background: linear-gradient(90deg, color-mix(in oklab, var(--ink) 75%, transparent), transparent 90%); }
+.gate-story { position: relative; max-width: 620px; padding: 200px 0 0; margin-left: 8%; }
+.world-gate #countdown { padding: 40px 0 150px; width: 48%; margin-left: 8%; }
+.world-gate #countdown > .absolute, .world-gate #countdown > .pointer-events-none { display: none; }
+.world-gate #countdown > .relative { padding: 0; text-align: left; }
+.world-gate #countdown h2 { font-size: 24px; }
+.world-gate #countdown .eyebrow { display: none; }
+.world-gate #countdown .panel { padding: 14px 0; background: transparent; border: 0; clip-path: none; }
+.world-gate #countdown .panel > span:first-of-type { font-family: var(--font-body); font-size: 54px; font-weight: 400; text-shadow: none; }
+.world-gate #countdown .scanlines { display: none; }
+.world-gate #countdown .mt-12 { margin-top: 25px; }
+.world-hero { min-height: 92svh; }
+.world-hero .world-shade { background: linear-gradient(180deg, color-mix(in oklab, var(--ink) 15%, transparent) 30%, color-mix(in oklab, var(--ink) 85%, transparent)); }
+.world-hero .world-camera img { object-position: 50% 28%; }
+.world-hero .world-camera img { loading: eager; }
+.hero-intro { position: relative; z-index: 2; width: 100%; text-align: center; padding: 45svh 24px 100px; }
+.hero-intro .eyebrow { font-size: 10px; color: var(--moonlight); }
+.hero-intro h1 { margin: 15px auto 0; font-family: var(--font-display); font-size: 72px; line-height: 1.15; text-shadow: 0 5px 35px var(--ink); }
+.hero-intro h1 span { color: var(--spirit); }
+.hero-tagline { margin-top: 12px; font-family: var(--font-jp); font-size: 24px; color: var(--bone); }
+.enter-world { margin-top: 32px; height: 52px; padding: 0 26px; gap: 24px; border-color: var(--moonlight); color: var(--bone); font-family: var(--font-body); font-size: 11px; border-radius: 0; background: color-mix(in oklab, var(--ink) 40%, transparent); backdrop-filter: blur(6px); }
+.enter-world:hover { background: var(--secondary); color: var(--moonlight); }
+.hero-caption { position: absolute; bottom: 32px; left: 6%; right: 6%; display: flex; justify-content: space-between; align-items: center; color: var(--muted-foreground); font-size: 9px; }
+.hero-caption .font-jp { font-size: 20px; }
+.hero-scroll { position: absolute; bottom: 23px; left: 50%; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--moonlight); }
+.hero-scroll span { width: 1px; height: 22px; background: var(--moonlight); }
+.hero-scroll svg { width: 14px; }
+.world-experience #join { padding-top: 110px; padding-bottom: 110px; }
+.world-experience #join h2 { font-family: var(--font-jp); font-weight: 500; font-size: 48px; }
+.world-experience #mono .panel, .world-experience #community .panel { background: transparent; clip-path: none; border: 0; border-top: 1px solid var(--border); }
+.world-experience #mono h2, .world-experience #community h2, .world-experience #roadmap h2, .world-experience #faq h2 { font-family: var(--font-jp); font-weight: 500; font-size: 48px; }
+.world-experience #community .panel > svg { display: none; }
+.world-experience #roadmap { background: var(--ink); }
+.world-experience #roadmap .font-display { font-family: var(--font-body); }
+@keyframes spirit-hover { 0%,100% { transform: translate3d(0,0,0) rotate(-2deg); } 50% { transform: translate3d(6px,-22px,0) rotate(2deg); } }
+@keyframes world-drift { from { transform: translateX(-5%); opacity: .4; } to { transform: translateX(5%); opacity: .8; } }
+@keyframes story-appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (min-width: 1600px) { .hero-intro h1 { font-size: 90px; } .world-story { padding-top: 260px; } }
+@media (max-width: 767px) {
+  .world-scene { min-height: 940px; }
+  .world-chapter { top: 90px; left: 7%; right: 7%; font-size: 9px; }
+  .world-story { width: auto; margin: 0 7%; max-width: none; padding: 180px 0 260px; }
+  .world-title { font-size: 44px; }
+  .world-copy { font-size: 15px; line-height: 1.8; }
+  .world-lore .world-shade { background: linear-gradient(180deg, color-mix(in oklab, var(--ink) 35%, transparent), color-mix(in oklab, var(--ink) 65%, transparent) 50%, transparent); }
+  .spirit-creature { width: 220px; height: 220px; right: 8%; bottom: 9%; }
+  .distant-spirit { width: 50px; height: 50px; right: 10%; top: 23%; opacity: .4; }
+  .world-floor-label { bottom: 36px; left: 7%; font-size: 8px; }
+  .world-floor-label span { display: none; }
+  .world-run .world-story { padding-top: 170px; padding-bottom: 180px; }
+  .world-run .world-shade { background: color-mix(in oklab, var(--ink) 65%, transparent); }
+  .flame-one { width: 40px; height: 55px; right: 10%; top: 14%; }
+  .flame-two { right: 24%; top: 81%; }
+  .floating-charm { right: 12%; top: 85%; }
+  .world-bottom-link { left: 7%; bottom: 50px; }
+  .world-gate { min-height: 1000px; }
+  .world-gate .world-camera img { object-position: 68% 50%; }
+  .world-gate .world-shade { background: color-mix(in oklab, var(--ink) 55%, transparent); }
+  .gate-story { padding-top: 170px; margin: 0 7%; }
+  .world-gate #countdown { width: auto; margin: 0 7%; padding-top: 40px; }
+  .world-gate #countdown .panel > span:first-of-type { font-size: 38px; }
+  .world-gate #countdown .panel > span:last-of-type { font-size: 8px; letter-spacing: 0; }
+  .world-gate #countdown .btn-game { font-size: 12px !important; padding-inline: 22px !important; }
+  .world-hero { min-height: 90svh; }
+  .hero-intro { padding: 43svh 18px 105px; }
+  .hero-intro h1 { max-width: 100%; font-size: 36px; }
+  .hero-tagline { font-size: 21px; }
+  .hero-caption { font-size: 7px; bottom: 25px; }
+  .hero-caption .font-jp { font-size: 15px; }
+  .hero-scroll { display: none; }
+  .world-experience #join h2, .world-experience #mono h2, .world-experience #community h2, .world-experience #roadmap h2, .world-experience #faq h2 { font-size: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .world-camera, .world-run .world-camera { transform: none; will-change: auto; }
 }

@@ -5,11 +5,10 @@ import { X_URL } from "@/config/site";
 import { PlayButton, XIcon } from "./primitives";
 
 const LINKS = [
-  { href: "#game", label: "GAME" },
-  { href: "#lore", label: "LORE" },
-  { href: "#mono", label: "$MONO" },
-  { href: "#how", label: "HOW TO PLAY" },
-  { href: "#community", label: "COMMUNITY" },
+  { href: "#lore", label: "THE FOREST" },
+  { href: "#game", label: "THE RUN" },
+  { href: "#gate", label: "THE GATE" },
+  { href: "#community", label: "THE PACK" },
 ];
 
 export function Nav() {
